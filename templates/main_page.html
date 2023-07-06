@@ -5,16 +5,20 @@
 	<title>Kakao 지도 시작하기</title>
 </head>
 <body>
-	<div>
-		<input type="radio" name="chk_info" value="HTML">HTML
-		<input type="radio" name="chk_info" value="CSS">CSS
-		<input type="radio" name="chk_info" value="웹디자인">웹디자인
-	</div>
+<!--	<div>-->
+<!--    	<input type="radio" name="district" value="saha" id="district-saha">사하구-->
+<!--		<input type="radio" name="chk_info" value="CSS">CSS-->
+<!--		<input type="radio" name="chk_info" value="웹디자인">웹디자인-->
+<!--	</div>-->
 	<div id="title"></div>
 	<div id="content"></div>
 
+	<button onclick="panTo_saha()">사하구</button>
+
 	<div id="map" style="width:1000px;height:600px;">메인페이지 입니다.</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=055b37171aafd0953d3866b059ec0fe2"></script>
+	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	        <script>
         var container = document.getElementById('map');
         var options = {
@@ -49,6 +53,15 @@
             };
         })(marker));
         {% endfor %}
+
+        function panTo_saha() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1795, 129.0756);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
     </script>
 </body>
 </html>

@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests
 import json
 import pandas as pd
+from django.http import JsonResponse
 
 # CSV 파일 경로
 file_path = '/mnt/c/Users/pc/PycharmProjects/pythonProject7/mysite/main/busan.csv'
@@ -31,7 +32,15 @@ def df(request):
     }
     return render(request, 'main_page.html', context)
 
-
+def update_center(request):
+    selected_district = request.POST.get('district')
+    if selected_district == 'saha':
+        lat = 35.1795
+        lng = 129.0756
+        # 좌표 값을 JsonResponse로 반환
+        return JsonResponse({'lat': lat, 'lng': lng})
+    else:
+        return JsonResponse({'error': 'Invalid district'})
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
