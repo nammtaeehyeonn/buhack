@@ -24,5 +24,7 @@ urlpatterns = [
     path('aaa/', views.aaa),
     path('bbb/', views.bbb),
     path('ccc/', views.ccc),
-
+    path('map/', views.map),
+    path('detail/', views.detail),
+    path('main_page/', views.df),
 ]
