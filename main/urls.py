@@ -27,4 +27,5 @@ urlpatterns = [
     path('map/', views.map),
     path('detail/', views.detail),
     path('main_page/', views.df),
+    path('index222/', views.index222),
 ]

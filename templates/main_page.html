@@ -13,7 +13,26 @@
 	<div id="title"></div>
 	<div id="content"></div>
 
+	<button onclick="panTo_jung()">중구</button>
+	<button onclick="panTo_seo()">서구</button>
+	<button onclick="panTo_dong()">동구</button>
+	<button onclick="panTo_youngdo()">영도구</button>
+	<button onclick="panTo_jin()">부산진구</button>
+	<button onclick="panTo_dongrae()">동래구</button>
+	<button onclick="panTo_nam()">남구</button>
+	<button onclick="panTo_buk()">북구</button>
+	<button onclick="panTo_haeundae()">해운대구</button>
 	<button onclick="panTo_saha()">사하구</button>
+	<button onclick="panTo_geumjung()">금정구</button>
+	<button onclick="panTo_kangseo()">강서구</button>
+	<button onclick="panTo_yeonjae()">연제구</button>
+	<button onclick="panTo_suyoung()">수영구</button>
+	<button onclick="panTo_sasang()">사상구</button>
+	<button onclick="panTo_kijang()">기장군</button>
+
+
+
+
 
 	<div id="map" style="width:1000px;height:600px;">메인페이지 입니다.</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=055b37171aafd0953d3866b059ec0fe2"></script>
@@ -23,7 +42,7 @@
         var container = document.getElementById('map');
         var options = {
             center: new kakao.maps.LatLng(35.1795, 129.0756),
-            level: 3
+            level: 6
         };
 
         var map = new kakao.maps.Map(container, options);
@@ -54,14 +73,151 @@
         })(marker));
         {% endfor %}
 
-        function panTo_saha() {
+        function panTo_jung() {
     		// 이동할 위도 경도 위치를 생성합니다
-    		var moveLatLon = new kakao.maps.LatLng(35.1795, 129.0756);
+    		var moveLatLon = new kakao.maps.LatLng(35.1054698, 129.0315450);
 
     		// 지도 중심을 부드럽게 이동시킵니다
     		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
     		map.panTo(moveLatLon);
 		}
+
+		        function panTo_seo() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1030941, 129.0148985);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_dong() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1290483, 129.0446982);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_youngdo() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.0787475, 129.0647650);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_jin() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1652494, 129.0430314);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_dongrae() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.2062140, 129.0792207);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_nam() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1254328, 129.0942767);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_buk() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.2292556, 129.0234631);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_haeundae() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1938469, 129.1536102);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_saha() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.0899401, 128.9744881);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_geumjung() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.2588922, 129.0915364);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_kangseo() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1547542, 128.9027555);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_yeonjae() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1824046, 129.0829635);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_suyoung() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1613118, 129.1112042);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_sasang() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1580273, 128.9865896);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_kijang() {
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.2979750, 129.2009199);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+
     </script>
 </body>
 </html>

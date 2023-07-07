@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .bg-gradient-custom {
+  background: linear-gradient(to right, #1e0ce8, #060233);
+}
+
+</style>
+<style>
+    .col-lg-4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center; /* 가로 중앙 정렬을 위한 추가 스타일 */
+        margin-top:15px;
+        margin-bottom:15px;
+    }
+
+    .col-lg-4 img {
+        max-width: 50%;
+        max-height: 50%;
+        object-fit: contain;
+        vertical-align: middle; /* 세로 중앙 정렬을 위한 추가 스타일 */
+    }
+</style>
+<style>
+    #map {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+</style>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-custom sidebar sidebar-dark accordion" id="accordionSidebar">
+        <form
+                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                       aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ul>
+
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!--                    최상단-->
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_jung()">중구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_seo()">서구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_dong()">동구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_youngdo()">영도구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_jin()">부산진구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_dongrae()">동래구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_nam()">남구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_buk()">북구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_haeundae()">해운대구
+                </button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_saha()">사하구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_geumjung()">금정구
+                </button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_kangseo()">강서구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_yeonjae()">연제구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_suyoung()">수영구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_sasang()">사상구</button>
+                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_kijang()">기장군</button>
+            </nav>
+
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">지도</h6>
+                                <h6 class="m-0 font-weight-bold text-primary" id="town"></h6>
+                            </div>
+                            <div style="height:500px;">
+                                <div id="map" style="width: 100%; height: 100%;">잠시만 기다려주세요...</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Pie Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">미리보기</h6>
+                                <button id="fold" onclick="fold()" class="btn btn-primary btn-sm" style="margin-right: 5px; display:none;">자세히보기</button>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body" style="max-height: 480px; overflow-y: auto;">
+                                <div id="title"></div>
+                                <div id="contents" style="display: block;"></div>
+                                <div id="allcon" style="display: none;"></div>
+                                <div id="image"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Project Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">식당</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4" id="food1"><a id="rank1" href="" target="_blank"><img src="../static/num1.png"></a></div>
+                                <div class="col-lg-4" id="food2"><a id="rank2" href="" target="_blank"><img src="../static/num2.png"></a></div>
+                                <div class="col-lg-4" id="food3"><a id="rank3" href="" target="_blank"><img src="../static/num3.png"></a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">숙소</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4" id="home1"><a id="rank4" href="" target="_blank"><img src="../static/num1.png"></a></div>
+                                <div class="col-lg-4" id="home2"><a id="rank5" href="" target="_blank"><img src="../static/num2.png"></a></div>
+                                <div class="col-lg-4" id="home3"><a id="rank6" href="" target="_blank"><img src="../static/num3.png"></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-12 mb-4">
+
+                        <!-- Project Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                            </div>
+                            <p>5번</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2021</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<!--<script src="vendor/jquery/jquery.min.js"></script>-->
+<!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+<!-- Core plugin JavaScript-->
+<!--<script src="vendor/jquery-easing/jquery.easing.min.js"></script>-->
+
+<!-- Custom scripts for all pages-->
+<!--<script src="js/sb-admin-2.min.js"></script>-->
+
+<!-- Page level plugins -->
+<!--<script src="vendor/chart.js/Chart.min.js"></script>-->
+
+<!-- Page level custom scripts -->
+<!--<script src="js/demo/chart-area-demo.js"></script>-->
+<!--<script src="js/demo/chart-pie-demo.js"></script>-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=055b37171aafd0953d3866b059ec0fe2"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+var container = document.getElementById('map');
+var options = {
+  center: new kakao.maps.LatLng(35.1795, 129.0756),
+  level: 6
+};
+
+var map = new kakao.maps.Map(container, options);
+
+// 마커 생성 및 표시
+var markers = [];
+
+{% for marker in markers %}
+var markerPosition = new kakao.maps.LatLng({{ marker.lat }}, {{ marker.lng }});
+var newMarker = new kakao.maps.Marker({
+  position: markerPosition,
+  clickable: true
+});
+newMarker.setMap(map);
+markers.push(newMarker);
+
+// 인포윈도우 생성
+var title = "{{ marker.title }}";
+var content = "{{ marker.con }}"; // 추가 변수 값
+var image_url = "{{ marker.image_url }}"; // 추가 변수 값
+<!--var iwContent = '<div style="padding:5px; height:100px; width:100px;"><p>' + title + '</p><img src="' + image_url + '" alt="Image" style="width:100%; height:100%; object-fit:cover;"></div>';-->
+<!--var infowindow = new kakao.maps.InfoWindow({-->
+<!--  content: iwContent-->
+<!--});-->
+
+
+<!--// 마커 마우스오버 이벤트 핸들러-->
+<!--kakao.maps.event.addListener(newMarker, 'mouseover', (function(marker, infowindow) {-->
+<!--  return function() {-->
+<!--    infowindow.open(map, marker);-->
+<!--  };-->
+<!--})(newMarker, infowindow));-->
+
+<!--// 마커 마우스아웃 이벤트 핸들러-->
+<!--kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker, infowindow) {-->
+<!--  return function() {-->
+<!--    infowindow.close();-->
+<!--  };-->
+<!--})(newMarker, infowindow));-->
+
+kakao.maps.event.addListener(newMarker, 'mouseover', (function(marker) {
+    var title = "{{ marker.title }}";
+    var content = "{{ marker.con }}"; // 추가 변수 값
+    var allcon = "{{ marker.allcon }}"; // 추가 변수 값
+    var image_url = "{{ marker.image_url }}"; // 추가 변수 값
+    var button = document.getElementById('fold');
+
+    var titleElement = document.getElementById('title');
+    var contentElement = document.getElementById('contents');
+    var allconElement = document.getElementById('allcon');
+    var imageElement = document.getElementById('image');
+    var foldElement = document.getElementById('fold');
+
+    return function() {
+        titleElement.innerHTML = "<h3>" + title + "</h3>";
+        contentElement.style.display = "none";
+        imageElement.style.display = "block";
+        imageElement.innerHTML = "<img src='" + image_url + "' alt='Image' width='100%' height='auto'>";
+        foldElement.style.display = "none";
+
+        // Click event listener
+        kakao.maps.event.addListener(marker, 'click', function() {
+            var food1 = "{{ marker.food1 }}";
+            var food2 = "{{ marker.food2 }}";
+            var food3 = "{{ marker.food3 }}";
+            var home1 = "{{ marker.home1 }}";
+            var home2 = "{{ marker.home2 }}";
+            var home3 = "{{ marker.home3 }}";
+
+            var rank1Element = document.getElementById('rank1');
+            var rank2Element = document.getElementById('rank2');
+            var rank3Element = document.getElementById('rank3');
+            var rank4Element = document.getElementById('rank4');
+            var rank5Element = document.getElementById('rank5');
+            var rank6Element = document.getElementById('rank6');
+
+
+            titleElement.innerHTML = "<h3>" + title + "</h3>";
+            contentElement.style.display = "block";
+            contentElement.innerHTML = "<p>" + content + "</p>";
+            allconElement.innerHTML = "<p>" + allcon + "</p>";
+            imageElement.style.display = "none";
+            foldElement.style.display = "block";
+
+            rank1Element.href = food1;
+            rank2Element.href = food2;
+            rank3Element.href = food3;
+            rank4Element.href = home1;
+            rank5Element.href = home2;
+            rank6Element.href = home3;
+        });
+    };
+})(newMarker));
+
+
+// 마커 마우스아웃 이벤트 핸들러
+kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
+            var title = "{{ marker.title }}";
+            var content = "{{ marker.con }}"; // 추가 변수 값
+
+            var foldElement = document.getElementById('fold');
+            var titleElement = document.getElementById('title');
+            var contentElement = document.getElementById('contents');
+            return function() {
+                titleElement.innerHTML = "<h3>" + title + "</h3>";
+                contentElement.innerHTML = "<p>" + content + "</p>";
+                foldElement.style.display = "block";
+            };
+        })(newMarker));
+
+{% endfor %}
+
+    function fold() {
+        var button = document.getElementById('fold');
+        var contents = document.getElementById('contents');
+        var allcon = document.getElementById('allcon');
+
+        if (contents.style.display === 'block') {
+            // 현재 상태가 자세히보기인 경우
+            contents.style.display = 'none';
+            allcon.style.display = 'block';
+            button.innerText = '간략히보기';
+        } else {
+            // 현재 상태가 간략히보기인 경우
+            contents.style.display = 'block';
+            allcon.style.display = 'none';
+            button.innerText = '자세히보기';
+        }
+    }
+
+
+        function panTo_jung() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "중구";
+
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1054698, 129.0315450);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+
+		}
+
+
+
+		        function panTo_seo() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "서구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1030941, 129.0148985);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_dong() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "동구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1290483, 129.0446982);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_youngdo() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "영도구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.0787475, 129.0647650);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_jin() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "진구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1652494, 129.0430314);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_dongrae() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "동래구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.2062140, 129.0792207);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_nam() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "남구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1254328, 129.0942767);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_buk() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "북구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.2292556, 129.0234631);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_haeundae() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "해운대구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1938469, 129.1536102);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_saha() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "사하구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.0899401, 128.9744881);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_geumjung() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "금정구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.2588922, 129.0915364);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_kangseo() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "강서구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1547542, 128.9027555);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_yeonjae() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "연제구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1824046, 129.0829635);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_suyoung() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "수영구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1613118, 129.1112042);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_sasang() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "사상구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.1580273, 128.9865896);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+		        function panTo_kijang() {
+        var townElement = document.getElementById('town');
+        townElement.innerText = "기장구";
+    		// 이동할 위도 경도 위치를 생성합니다
+    		var moveLatLon = new kakao.maps.LatLng(35.2979750, 129.2009199);
+
+    		// 지도 중심을 부드럽게 이동시킵니다
+    		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    		map.panTo(moveLatLon);
+		}
+
+
+
+</script>
+</body>
+
+</html>
