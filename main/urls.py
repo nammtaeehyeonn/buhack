@@ -18,6 +18,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+
 app_name = 'main'
 urlpatterns = [
     path('', views.index),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('index222/', views.index222, name='index222'),
     path('upload/', views.upload),
     path('upupup/', views.upupup, name='upupup'),
+    path('question_chat/', views.question_chat, name='question_chat'),
 ]
 
 if settings.DEBUG:

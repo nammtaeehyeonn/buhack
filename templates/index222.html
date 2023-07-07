@@ -2,8 +2,15 @@
 <html lang="en">
 <style>
     .bg-gradient-custom {
-  background: linear-gradient(to right, #1e0ce8, #060233);
+  background: linear-gradient(to right, #858796, #858796);
 }
+
+
+
+
+
+
+
 
 </style>
 <style>
@@ -22,6 +29,13 @@
         object-fit: contain;
         vertical-align: middle; /* 세로 중앙 정렬을 위한 추가 스타일 */
     }
+
+
+
+
+
+
+
 </style>
 <style>
     #map {
@@ -32,6 +46,13 @@
         align-items: center;
         text-align: center;
     }
+
+
+
+
+
+
+
 </style>
 <head>
 
@@ -51,6 +72,9 @@
 
     <!-- Custom styles for this template-->
     <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css">
+
+
 
 </head>
 
@@ -61,18 +85,34 @@
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-custom sidebar sidebar-dark accordion" id="accordionSidebar">
-        <form
-                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                       aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
+        <!--        <div style="color:black; text-align:center; margin-top:15px;">물어보기</div>-->
+
+        <div class="col-lg-12" style="width: 700px; margin-top:15px;">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Busan Tour with Storytelling</h6>
                 </div>
+                <div class="card-header py-3" style="width:100%;">
+                    <form method="POST" action="{% url 'main:question_chat' %}"
+                          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" name="question" class="form-control bg-light small"
+                                   style="width: 200px; margin-left: -37px; margin-right: -5px; text-align: center;"
+                                   placeholder="물어보기" aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary"
+                                        style="width: 200px; margin-top: 10px; margin-left: -37px; margin-right: -7px;">
+                                    <i class="fas">검색</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <p id="chat">{{ chat_response }}</p>
             </div>
-        </form>
+        </div>
+
     </ul>
 
     <!-- End of Sidebar -->
@@ -119,8 +159,8 @@
                     <div class="col-xl-8 col-lg-7">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">지도</h6>
-                                <h6 class="m-0 font-weight-bold text-primary" id="town"></h6>
+                                <h3 class="m-0 font-weight-bold text-primary">지도</h3>
+                                <h4 class="m-0 font-weight-bold text-primary" id="town"></h4>
                             </div>
                             <div style="height:500px;">
                                 <div id="map" style="width: 100%; height: 100%;">잠시만 기다려주세요...</div>
@@ -135,8 +175,10 @@
                             <!-- Card Header - Dropdown -->
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">미리보기</h6>
-                                <button id="fold" onclick="fold()" class="btn btn-primary btn-sm" style="margin-right: 5px; display:none;">자세히보기</button>
+                                <h3 class="m-0 font-weight-bold text-primary">미리보기</h3>
+                                <button id="fold" onclick="fold()" class="btn btn-primary btn-sm"
+                                        style="margin-right: 5px; display:none;">자세히보기
+                                </button>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body" style="max-height: 480px; overflow-y: auto;">
@@ -158,12 +200,15 @@
                         <!-- Project Card Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">식당</h6>
+                                <h3 class="m-0 font-weight-bold text-primary">식당</h3>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4" id="food1"><a id="rank1" href="" target="_blank"><img src="../static/num1.png"></a></div>
-                                <div class="col-lg-4" id="food2"><a id="rank2" href="" target="_blank"><img src="../static/num2.png"></a></div>
-                                <div class="col-lg-4" id="food3"><a id="rank3" href="" target="_blank"><img src="../static/num3.png"></a></div>
+                                <div class="col-lg-4" id="food1"><a id="rank1" href="" target="_blank"><img
+                                        src="../static/num1.png"></a></div>
+                                <div class="col-lg-4" id="food2"><a id="rank2" href="" target="_blank"><img
+                                        src="../static/num2.png"></a></div>
+                                <div class="col-lg-4" id="food3"><a id="rank3" href="" target="_blank"><img
+                                        src="../static/num3.png"></a></div>
                             </div>
                         </div>
                     </div>
@@ -172,16 +217,20 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">숙소</h6>
+                                <h3 class="m-0 font-weight-bold text-primary">숙소</h3>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4" id="home1"><a id="rank4" href="" target="_blank"><img src="../static/num1.png"></a></div>
-                                <div class="col-lg-4" id="home2"><a id="rank5" href="" target="_blank"><img src="../static/num2.png"></a></div>
-                                <div class="col-lg-4" id="home3"><a id="rank6" href="" target="_blank"><img src="../static/num3.png"></a></div>
+                                <div class="col-lg-4" id="home1"><a id="rank4" href="" target="_blank"><img
+                                        src="../static/num1.png"></a></div>
+                                <div class="col-lg-4" id="home2"><a id="rank5" href="" target="_blank"><img
+                                        src="../static/num2.png"></a></div>
+                                <div class="col-lg-4" id="home3"><a id="rank6" href="" target="_blank"><img
+                                        src="../static/num3.png"></a></div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="row">
 
@@ -190,10 +239,78 @@
 
                         <!-- Project Card Example -->
                         <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">형준</h6>
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h3 class="m-0 font-weight-bold text-primary">인기키워드</h3>
+                                <h4 class="m-0 font-weight-bold text-primary" id="town1"></h4>
                             </div>
-                            <p>5번</p>
+                            <div class="card-header py-3">
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_jung()">중구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_seo()">
+                                    서구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_dong()">동구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_youngdo()">영도구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_jin()">
+                                    부산진구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_dongrae()">동래구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_nam()">
+                                    남구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;" onclick="panTo_buk()">
+                                    북구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_haeundae()">해운대구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_saha()">사하구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_geumjung()">금정구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_kangseo()">강서구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_yeonjae()">연제구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_suyoung()">수영구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_sasang()">사상구
+                                </button>
+                                <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
+                                        onclick="panTo_kijang()">기장군
+                                </button>
+                            </div>
+
+                            <div id="seo" style="background-color:white; display:none;"></div>
+                            <div id="jung" style="background-color:white; display:none;"></div>
+                            <div id="kangseo" style="background-color:white; display:none;"></div>
+                            <div id="keumjung" style="background-color:white; display:none;"></div>
+                            <div id="kijang" style="background-color:white; display:none;"></div>
+                            <div id="nam" style="background-color:white; display:none;"></div>
+                            <div id="dong" style="background-color:white; display:none;"></div>
+                            <div id="dongrae" style="background-color:white; display:none;"></div>
+                            <div id="jin" style="background-color:white; display:none;"></div>
+                            <div id="buk" style="background-color:white; display:none;"></div>
+                            <div id="sasang" style="background-color:white; display:none;"></div>
+                            <div id="saha" style="background-color:white; display:none;"></div>
+                            <div id="suyoung" style="background-color:white; display:none;"></div>
+                            <div id="yeonjae" style="background-color:white; display:none;"></div>
+                            <div id="youngdo" style="background-color:white; display:none;"></div>
+                            <div id="haeundae" style="background-color:white; display:none;"></div>
+
                         </div>
                     </div>
                 </div>
@@ -206,16 +323,20 @@
                         <!-- Project Card Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">칠판</h6>
+                                <h3 class="m-0 font-weight-bold text-primary">칠판</h3>
+                            </div>
+                            <div class="card-header py-3">
                                 <form method="POST" action="{% url 'main:upupup' %}" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="m-0 font-weight-bold text-primary">
                                         <label for="id_image">사진 업로드:</label>
-                                        <input type="file" name="image" id="id_image" accept="image/*">
+                                        <input type="file" name="image" id="id_image" accept="image/*"
+                                               style="margin-left:15px">
                                     </div>
                                     <div class="m-0 font-weight-bold text-primary">
                                         <label for="id_name">이름:</label>
-                                        <input type="text" name="name" id="id_name" style="margin-right:15px;">
+                                        <input type="text" name="name" id="id_name"
+                                               style="margin-right:15px; margin-left: 68px;">
                                         <button type="submit" id="submitBtn" class="btn btn-primary btn-sm" disabled>
                                             제출
                                         </button>
@@ -224,13 +345,14 @@
                             </div>
                             <div class="row">
                                 {% for image in images %}
-                                <div class="col-lg-3 mb-3">
+                                <div class="col-lg-4">
                                     <div class="image-card">
                                         <h3>{{ image.name }}</h3>
-                                        <img src="/media/{{ image.image }}" alt="{{ image.name }}">
+                                        <img src="/media/{{ image.image }}" alt="{{ image.name }}"
+                                             style="width: 150px; height: 150px; max-width: 100%; max-height: 100%;">
                                     </div>
                                 </div>
-                                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                                {% if forloop.counter|divisibleby:3 and not forloop.last %}
                             </div>
                             <div class="row">
                                 {% endif %}
@@ -239,6 +361,7 @@
                         </div>
                     </div>
                 </div>
+
 
             </div>
             <!-- /.container-fluid -->
@@ -260,32 +383,7 @@
     <!-- End of Content Wrapper -->
 
 </div>
-<!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 <!--<script src="vendor/jquery/jquery.min.js"></script>-->
@@ -304,6 +402,7 @@
 <!--<script src="js/demo/chart-area-demo.js"></script>-->
 <!--<script src="js/demo/chart-pie-demo.js"></script>-->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=055b37171aafd0953d3866b059ec0fe2"></script>
+<script src="/static/js/keyword.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -458,10 +557,48 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
         }
     }
 
+var seoElement = document.getElementById('seo');
+var jungElement = document.getElementById('jung');
+var kangseoElement = document.getElementById('kangseo');
+var keumjungElement = document.getElementById('keumjung');
+var kijangElement = document.getElementById('kijang');
+var namElement = document.getElementById('nam');
+var dongElement = document.getElementById('dong');
+var dongraeElement = document.getElementById('dongrae');
+var jinElement = document.getElementById('jin');
+var bukElement = document.getElementById('buk');
+var sasangElement = document.getElementById('sasang');
+var sahaElement = document.getElementById('saha');
+var suyoungElement = document.getElementById('suyoung');
+var yeonjaeElement = document.getElementById('yeonjae');
+var youngdoElement = document.getElementById('youngdo');
+var haeundaeElement = document.getElementById('haeundae');
+
+
+
+
 
         function panTo_jung() {
+        seoElement.style.display = 'none';
+jungElement.style.display = 'block';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "중구";
+        var town1Element = document.getElementById('town1');
+        town1Element.innerText = "중구";
 
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1054698, 129.0315450);
@@ -475,8 +612,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 
 
 		        function panTo_seo() {
+		                seoElement.style.display = 'block';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "서구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "서구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1030941, 129.0148985);
 
@@ -486,8 +641,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_dong() {
+		        		                seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'block';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "동구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "동구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1290483, 129.0446982);
 
@@ -497,8 +670,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_youngdo() {
+		        		        		                seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'block';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "영도구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "영도구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.0787475, 129.0647650);
 
@@ -508,8 +699,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_jin() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'block';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "진구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "진구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1652494, 129.0430314);
 
@@ -519,8 +728,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_dongrae() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'block';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "동래구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "동래구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.2062140, 129.0792207);
 
@@ -530,8 +757,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_nam() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'block';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "남구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "남구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1254328, 129.0942767);
 
@@ -541,8 +786,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_buk() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'block';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "북구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "북구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.2292556, 129.0234631);
 
@@ -552,8 +815,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_haeundae() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'block';
         var townElement = document.getElementById('town');
         townElement.innerText = "해운대구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "해운대구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1938469, 129.1536102);
 
@@ -563,8 +844,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_saha() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'block';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "사하구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "사하구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.0899401, 128.9744881);
 
@@ -574,8 +873,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_geumjung() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'block';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "금정구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "금정구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.2588922, 129.0915364);
 
@@ -585,8 +902,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_kangseo() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'block';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "강서구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "강서구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1547542, 128.9027555);
 
@@ -596,8 +931,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_yeonjae() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'block';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "연제구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "연제구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1824046, 129.0829635);
 
@@ -607,8 +960,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_suyoung() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'block';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "수영구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "수영구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1613118, 129.1112042);
 
@@ -618,8 +989,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_sasang() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'none';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'block';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
         townElement.innerText = "사상구";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "사상구";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.1580273, 128.9865896);
 
@@ -629,8 +1018,26 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
 		}
 
 		        function panTo_kijang() {
+seoElement.style.display = 'none';
+jungElement.style.display = 'none';
+kangseoElement.style.display = 'none';
+keumjungElement.style.display = 'none';
+kijangElement.style.display = 'block';
+namElement.style.display = 'none';
+dongElement.style.display = 'none';
+dongraeElement.style.display = 'none';
+jinElement.style.display = 'none';
+bukElement.style.display = 'none';
+sasangElement.style.display = 'none';
+sahaElement.style.display = 'none';
+suyoungElement.style.display = 'none';
+yeonjaeElement.style.display = 'none';
+youngdoElement.style.display = 'none';
+haeundaeElement.style.display = 'none';
         var townElement = document.getElementById('town');
-        townElement.innerText = "기장구";
+        townElement.innerText = "기장군";
+                var town1Element = document.getElementById('town1');
+        town1Element.innerText = "기장군";
     		// 이동할 위도 경도 위치를 생성합니다
     		var moveLatLon = new kakao.maps.LatLng(35.2979750, 129.2009199);
 
@@ -638,6 +1045,13 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
     		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
     		map.panTo(moveLatLon);
 		}
+
+
+
+
+
+
+
 
 
 

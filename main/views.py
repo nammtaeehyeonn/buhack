@@ -8,14 +8,15 @@ from .models import Image
 
 from django.shortcuts import render, redirect
 from .forms import ImageForm
+import openai
 
 import base64
 # CSV 파일 경로
 file_path = '/mnt/c/Users/pc/PycharmProjects/pythonProject7/mysite/main/busan.csv'
 
 # CSV 파일을 데이터프레임으로 변환
-busan_df = pd.read_csv(file_path, encoding='cp949')
-busan_df_data = busan_df[['제목', '위도', '경도', '내용', '이미지주소', '맛집1', '맛집2', '맛집3', '숙소1', '숙소2', '숙소3', '부제']]
+busan_df = pd.read_csv(file_path, encoding='utf8')
+busan_df_data = busan_df[['제목', '위도', '경도', '내용', '이미지주소', '맛집1', '맛집2', '맛집3', '숙소1', '숙소2', '숙소3', '부제', '내용요약']]
 markers = []
 for _, row in busan_df_data.iterrows():
     title = row['제목']
@@ -71,6 +72,54 @@ def df(request):
         'markers': markers
     }
     return render(request, 'main_page.html', context)
+
+# def question_chat(request,question):
+#     openai.api_key = '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'
+#     print(question)
+#     print("#####")
+#     messages=[]
+#
+#     content = question+',3줄내로 내용을 요약해서 작성해줘'
+#     messages.append({"role":"user","content":content})
+#     completion = openai.ChatCompletion. create (
+#     model="gpt-3.5-turbo",
+#     messages=messages
+#     )
+#     chat_response = completion. choices[0]. message.content
+# #     print (f'ChatGPT:\n {chat_response}')
+#     messages.append({"role": "assistant", "content": chat_response})
+# #     print('-------------------------------------------')
+#     print(chat_response)
+#     return render(request, 'index222.html', {'chat_response': chat_response})
+
+def question_chat(request):
+    images = collection.find()
+
+    if request.method == 'POST':
+        question = request.POST.get('question', '')
+
+        openai.api_key = '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'
+
+        messages = []
+
+        content = question + ',3줄내로 내용을 요약해서 작성해줘'
+        messages.append({"role": "user", "content": content})
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages
+        )
+        chat_response = completion.choices[0].message.content
+
+        context = {
+            'markers': markers,
+            'images': images,
+            'chat_response': chat_response
+        }
+
+        return render(request, 'index222.html', context)
+
+    return render(request, 'index222.html')
+
 
 # Create your views here.
 def index(request):
