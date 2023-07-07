@@ -1,8 +1,4 @@
-from django.shortcuts import render
-import requests
-import json
 import pandas as pd
-from django.http import JsonResponse
 from pymongo import MongoClient
 from .models import Image
 
@@ -10,7 +6,6 @@ from django.shortcuts import render, redirect
 from .forms import ImageForm
 import openai
 
-import base64
 # CSV 파일 경로
 file_path = '/mnt/c/Users/pc/PycharmProjects/pythonProject7/mysite/main/busan.csv'
 
@@ -52,53 +47,13 @@ client = MongoClient("mongodb://localhost:27017")
 db = client['busan_hack']  # DB명
 collection = db['main_image']  # 컬렉션 명
 
-def df(request):
-    busan_df_data = busan_df[['제목', '위도', '경도', '내용']]
-    markers = []
-    for _, row in busan_df_data.iterrows():
-        title = row['제목']
-        lat = row['위도']
-        lng = row['경도']
-        con = row['내용']
-        marker = {
-            'title': title,
-            'lat': lat,
-            'lng': lng,
-            'con': con
-        }
-        markers.append(marker)
-
-    context = {
-        'markers': markers
-    }
-    return render(request, 'main_page.html', context)
-
-# def question_chat(request,question):
-#     openai.api_key = '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'
-#     print(question)
-#     print("#####")
-#     messages=[]
-#
-#     content = question+',3줄내로 내용을 요약해서 작성해줘'
-#     messages.append({"role":"user","content":content})
-#     completion = openai.ChatCompletion. create (
-#     model="gpt-3.5-turbo",
-#     messages=messages
-#     )
-#     chat_response = completion. choices[0]. message.content
-# #     print (f'ChatGPT:\n {chat_response}')
-#     messages.append({"role": "assistant", "content": chat_response})
-# #     print('-------------------------------------------')
-#     print(chat_response)
-#     return render(request, 'index222.html', {'chat_response': chat_response})
-
 def question_chat(request):
     images = collection.find()
 
     if request.method == 'POST':
         question = request.POST.get('question', '')
 
-        openai.api_key = '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'
+        openai.api_key = '***'
 
         messages = []
 
@@ -122,8 +77,6 @@ def question_chat(request):
 
 
 # Create your views here.
-def index(request):
-    return render(request, 'index.html')
 
 def index222(request):
     images = collection.find()
@@ -133,11 +86,6 @@ def index222(request):
     }
     return render(request, 'index222.html', context)
 
-def upload(request):
-    return render(request, 'upload.html')
-
-
-from bson.binary import Binary
 
 def upupup(request):
     if request.method == 'POST':
@@ -160,18 +108,3 @@ def upupup(request):
         form = ImageForm()
 
     return render(request, 'index222.html', {'form': form})
-
-def aaa(request):
-    return render(request, 'aaa.html')
-
-def bbb(request):
-    return render(request, 'bbb.html')
-
-def ccc(request):
-    return render(request, 'ccc.html')
-
-def map(request):
-    return render(request, 'map.html')
-
-def detail(request):
-    return render(request, 'detail.html')
