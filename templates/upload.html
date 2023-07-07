@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" action="{% url 'main:upupup' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div>
+    <label for="id_image">사진 업로드:</label>
+    <input type="file" name="image" id="id_image" accept="image/*">
+  </div>
+  <div>
+    <label for="id_name">이름:</label>
+    <input type="text" name="name" id="id_name">
+  </div>
+  <div>
+
+    <button type="submit">제출</button>
+
+  </div>
+</form>
+<!--<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAABBCAYAAACJtRdQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJSSURBVHhe7ZoBkqMgEEXbPQ7MdfA6ONeB64DXcT9ZMosmM-->
+<!--yMNMVrwqqhYRqz+0DTdJMMCqEH+xM/m6MJbowtvjS68Nbrw1ujCW6MLb40uvDXqCveWpmkkKSUNw/DQwv1xmsj6+HwWlkZ5f5ekifWOhHAQUYwzixIUDjT2N6EW42L/PTi9iKS/0DmdHymecW9HGj5GsnO8AYTSZJwjmBYGFg3XzpASMP3Oj-->
+<!--Bn8gAfwpr+cf/qZGJU/i5uZC02Z+N1PVJ5xvvAHARAdv/odLI3cvmcRblRquFiy7dh4y69CzrHGLVkbLwNCkZLxei+IAxpK7sx44ZGrnSfc+5WRQinK1U3oobAVfIFgd2Sc4wmfZ0qC+G1/vhp1E5gLwROO/ThxUng+z0dneM674AmHa6fOz-->
+<!--QtMiBPrQJEfIAtgujqMxEb8xfxJn2mU34NFn1W2xwmQBcRtjQEjCbnDSX5Ok7kFqqSs4mIpa8RB/FoIjFIaA+CW/6bh2mhUcGL13G7RgbMJv9FiWXpDKjIeg4jSU2uF3Q4mPiHcVzqUrHjWo0x9Z94TB+ACpF7FKIo29L+CtEYXzsWOz09UX-->
+<!--9XkyD2l3XBb6QUYtd2bj2gZWeI3XCaqO70e4HPs4wcgUcQ8zw549OB2djxq/qrHFtHliwgFCLLR1Rp8bSvP3MqFb0vTV7fc4uYbKmxnqWGhzKxg1QFUXuPhrPwaR809qrdGZeGe7Lt+784lrnU+D4eHxzVVsKeVz7icyDtN6e9/R1HiW/0Ep-->
+<!--jW68NbowlujC2+NLrw1uvC2IPoLVg0qV7jzQ5IAAAAASUVORK5CYII=" alt="Image">-->
+
+</body>
+</html>

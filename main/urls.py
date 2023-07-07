@@ -16,9 +16,9 @@ Including another URLconf
 from django.urls import path
 # from django.contrib.auth import views as auth_views
 from . import views
-# from django.conf import settings
-# from django.conf.urls.static import static
-
+from django.conf import settings
+from django.conf.urls.static import static
+app_name = 'main'
 urlpatterns = [
     path('', views.index),
     path('aaa/', views.aaa),
@@ -27,5 +27,10 @@ urlpatterns = [
     path('map/', views.map),
     path('detail/', views.detail),
     path('main_page/', views.df),
-    path('index222/', views.index222),
+    path('index222/', views.index222, name='index222'),
+    path('upload/', views.upload),
+    path('upupup/', views.upupup, name='upupup'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

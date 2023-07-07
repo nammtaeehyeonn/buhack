@@ -77,12 +77,22 @@ WSGI_APPLICATION = 'tutorialdjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default':{
+        'ENGINE': 'djongo',
+        'NAME': 'busan_hack',
+        'HOST': 'localhost',
+        'PORT': '27017'
     }
 }
+
 
 
 # Password validation
@@ -137,7 +147,7 @@ STATICFILES_DIRS = [
 # MEDIA_URL = "media/"
 # MEDIA_ROOT =  BASE_DIR / "media"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 
 # MEDIA_URL = 'media/'
 # MEDIA_ROOT = [
