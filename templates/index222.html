@@ -40,7 +40,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Busan Tour with Storytelling</title>
 
     <!-- Custom fonts for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -218,7 +218,7 @@
                                 <h3 class="m-0 font-weight-bold text-primary">인기키워드</h3>
                                 <h4 class="m-0 font-weight-bold text-primary" id="town1"></h4>
                             </div>
-                            <div class="card-header py-3">
+                            <div class="card-header py-3" >
                                 <button class="btn btn-primary btn-sm" style="margin-right: 5px;"
                                         onclick="panTo_jung()">중구
                                 </button>
@@ -268,7 +268,7 @@
                                         onclick="panTo_kijang()">기장군
                                 </button>
                             </div>
-
+                            <div id="zip" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
                             <div id="seo" style="background-color:white; display:none;"></div>
                             <div id="jung" style="background-color:white; display:none;"></div>
                             <div id="kangseo" style="background-color:white; display:none;"></div>
@@ -285,7 +285,7 @@
                             <div id="yeonjae" style="background-color:white; display:none;"></div>
                             <div id="youngdo" style="background-color:white; display:none;"></div>
                             <div id="haeundae" style="background-color:white; display:none;"></div>
-
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -359,7 +359,7 @@
 
 </div>
 
-<script type="text/javascript" src="***"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=055b37171aafd0953d3866b059ec0fe2"></script>
 <script src="/static/js/keyword.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -439,6 +439,36 @@ kakao.maps.event.addListener(newMarker, 'mouseover', (function(marker) {
             rank4Element.href = home1;
             rank5Element.href = home2;
             rank6Element.href = home3;
+
+
+<!--if (food2 === "nan") {-->
+<!--    rank1Element.removeAttribute("href");-->
+<!--    rank1Element.removeAttribute("target");-->
+<!--    rank1Element.style.pointerEvents = "none";-->
+
+<!--    rank2Element.removeAttribute("href");-->
+<!--    rank2Element.removeAttribute("target");-->
+<!--    rank2Element.style.pointerEvents = "none";-->
+
+<!--    rank3Element.removeAttribute("href");-->
+<!--    rank3Element.removeAttribute("target");-->
+<!--    rank3Element.style.pointerEvents = "none";-->
+<!--}-->
+
+<!--if (home2 === "nan") {-->
+<!--    rank5Element.removeAttribute("href");-->
+<!--    rank5Element.removeAttribute("target");-->
+<!--    rank5Element.style.pointerEvents = "none";-->
+
+<!--    rank4Element.removeAttribute("href");-->
+<!--    rank4Element.removeAttribute("target");-->
+<!--    rank4Element.style.pointerEvents = "none";-->
+
+<!--    rank6Element.removeAttribute("href");-->
+<!--    rank6Element.removeAttribute("target");-->
+<!--    rank6Element.style.pointerEvents = "none";-->
+<!--}-->
+
         });
     };
 })(newMarker));
@@ -455,11 +485,15 @@ kakao.maps.event.addListener(newMarker, 'mouseout', (function(marker) {
             return function() {
                 titleElement.innerHTML = "<h3>" + title + "</h3>";
                 contentElement.innerHTML = "<p>" + content + "</p>";
-                foldElement.style.display = "block";
+<!--                foldElement.style.display = "block";-->
             };
         })(newMarker));
 
 {% endfor %}
+
+
+
+
 // 입력 값 변경 감지 함수
     function checkInputs() {
         var imageValue = document.getElementById("id_image").value;
