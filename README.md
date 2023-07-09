@@ -1,89 +1,82 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=350&section=header&text=Busan%20Tour%20%20with%20Storytelling&fontSize=90&fontColor=FFBF00&desc=스토리텔링과%20함께%20하는%20부산%20여행&descSize=25&descAlignY=75)
+# Busan Tour with Storytelling
+
+### 스토리텔링과 함께하는 부산여행
+![image](https://github.com/nammtaeehyeonn/buhack/assets/118907049/82ecfc13-a0cc-4d6e-8a77-7b1f84b5248f)
 
 
+<br>
 
+## 개요
+- BiG DATA HACKATHON : 부산광역시, 부산테크노파크, 창업진흥원에서 주관하는 무박 3일동안 진행되는 실리콘밸리식 오리지널 해커톤
+- 데이터 분석과 AI 기술을 활용하여 문제를 해결하고 서비스를 개발
+  
+  <br>
+  
+- 2023.07.06 17:30 ~ 2023.07.08 10:00 까지 진행 
+- 인기상(장려상) 수상
 
-## 👴🏻프로젝트 'CMNAI' 👵🏻
-![메인페이지](https://github.com/mstar23/CMNAI_proj/assets/117613860/94cbfd44-6d45-48bf-a718-6fa6d4f07088)
-<div align="center">
- <h1>
- <a href="https://youtu.be/-zNDuX9tTr8">
-  시연영상 확인하기
- </a>
- </h1>
-</div>
+<br>
 
----
-## 🎈프로젝트 개요
-<div align="center">
- <img src="https://github.com/mstar23/CMNAI_proj/assets/79824241/7ffef492-b2c2-4e58-96f1-7233a8ff0488" width="500" height="300">
- <img src="https://github.com/mstar23/CMNAI_proj/assets/79824241/ee11e916-bd89-4ae8-bf79-4c4d9b292115" width="700">
-</div>
+## 개발 동기
 
----
-## ⚒️기술 스택
-<div align="center">
-  <img src="https://img.shields.io/badge/pycharm-000000?style=for-the-badge&logo=pycharm&logoColor=white">
-  <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
-  <img src="https://img.shields.io/badge/datagrip-000000?style=for-the-badge&logo=datagrip&logoColor=white">
-</div>
-<div align="center">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
-  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-</div>
-<div align="center">
-  <img src="https://img.shields.io/badge/ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white">
-  <img src="https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white">
-  <img src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
-</div>
-<div align="center">
-  <img src="https://img.shields.io/badge/ec2-FF9900?style=for-the-badge&logo=amazon&logoColor=white">
-  <img src="https://img.shields.io/badge/Gunicorn-499848?style=for-the-badge&logo=gunicorn&logoColor=white">
-  <img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=Nginx&logoColor=white">
-</div>
-<div align="center">
-  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white">
-  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-</div>
+- 부산의 성장 동력 중 가장 중요한 것은 '관광'
+  - 부산시는 내국 관광객 뿐만 아니라 외국 관광객 유치에도 많은 관심을 보이고 있음.
+ 
+<br>
 
----
+- 지차제에서 부산 내 관광지에 대한 '스토리텔링'자료를 제공
+  - 부산 스토리텔링협의회는 부산 시민의 이야기와 역사를 공유하고 보존하며 부산의 정체성을 잃지 않기 위해 노력하고 있음.
+ 
+<br>
 
-## 🙌사용 기술
-### OCR<br>
-> 지정한 영역 내의 글자를 자동으로 인식하는 인공지능 기술
-### KoBERT<br>
-> SKTBrain에서 기존 BERT의 한국어 성능 한계를 극복하기 위해 위키피디아, 뉴스 등에서 수집한 한국어 문장으로 학습하여 개발된 모델
-### Tensorflow.js
-> Javascript 로 실행할 수 있는 오픈소스 머신러닝 라이브러리
----
+- 관광 정보 안내 부족 현상
+  - 2020/21년 기준 내/외국인 대상 부산 관광의 어려움에 대한 투표 결과
+  ![image](https://github.com/nammtaeehyeonn/buhack/assets/118907049/056daa0d-2d68-483a-a442-2bbef10b575b)
+ 
+<br>
 
-## 🎊콘텐츠
+### 결론 : 부산 관광지의 스토리를 누구나 접근하기 쉽게 제공하는 서비스가 필요하다.
 
-> ### 오늘의 일기
-> 웹 사이트에 구현된 원고지에 손글씨로 일상을 기록하며 과거 회상이 가능합니다.
+<br>
 
-> ### 단어 퀴즈
-> 테마 별 단어의 초성을 보여주고 답을 작성하고 제출한 후, 점수보기를 눌러 점수를 확인할 수 있습니다.
+## 서비스 개발환경
 
-> ### 지난 기억
->  작성한 일기를 감정 분석 한 결과를 달력에 지정된 색으로 표시해주고, 각 일자별로 작성한 일기를 확인할 수 있습니다.
->  또한 달력 오른쪽에는 퀴즈 게시판을 배치하여 퀴즈의 결과를 볼 수 있습니다.
+![image](https://github.com/nammtaeehyeonn/buhack/assets/118907049/390ac71d-dfa6-41d6-8d7b-577c7ab97db3)
 
-> ### 같이 즐겨요
-> * 포즈맞추기
-> > 일정 시간동안 포즈 이미지를 보여준 후, 따라했을 때의 일치 여부를 알려줍니다.
-> * 로보트와 가위바위보
-> > 로봇과 랜덤으로 가위바위보 게임을 할 수 있습니다.
+<br>
 
---- 
-## 👥Members
-<div align="center">
-  <img width="991" alt="스크린샷 2023-06-29 오후 2 38 51" src="https://github.com/mstar23/CMNAI_proj/assets/117613860/0b56eb78-13d3-4de2-a0bb-f0c8c940869a">
-</div>
+## 주요 기능
 
+- 카카오맵 API 활용
+  - 특정 지역구를 클릭하면 화면 이동
+  - 마커에 커서를 올리면 이름과 사진을 확인
+  - 마커를 클릭하면 이름과 요약된 정보, 원형 정보 확인 가능
 
+<br>
 
+- Chat-GPT API 활용
+  - 사용자가 검색하는 내용에 대해 3줄로 요약한 정보가 출력됨
+ 
+<br>
 
+- Crawling
+  - 해당 마커를 클릭하면 주변의 주요 식당과 숙소 TOP3로 연결되는 창 활성화
+  - 특정 지역구에 대한 최근 1달 간 가장 많이 검색된 토픽 시각화 
 
+<br>
+
+- 사용자 간 공유 가능한 방명록 기능 활성화
+  
+<br>
+
+## 서비스 영상
+
+[![유튜브 영상 썸네일](https://img.youtube.com/vi/jfxA1GlgkC0/0.jpg)](https://www.youtube.com/watch?v=jfxA1GlgkC0)
+
+  
+
+<br>
+
+## 기대효과
+
+![image](https://github.com/nammtaeehyeonn/buhack/assets/118907049/3089e338-7919-4759-833a-d02753efc7de)
