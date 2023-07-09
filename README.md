@@ -71,7 +71,7 @@
 
 ## 서비스 영상
 
-[![유튜브 영상 썸네일](https://img.youtube.com/vi/jfxA1GlgkC0/0.jpg)](https://www.youtube.com/watch?v=jfxA1GlgkC0)
+[![유튜브 영상 썸네일](https://img.youtube.com/vi/jfxA1GlgkC0/0.jpg?v=12345)](https://www.youtube.com/watch?v=jfxA1GlgkC0)
 
   
 
